@@ -9,11 +9,13 @@ import {
 const About = () => {
   return (
     <div className="pt-20 max-w-7xl mx-auto px-4">
+     
+     <Team />
       <AboutUs />
-      <Team />
-      <Testimonial />
+     
+      {/* <Testimonial />
       <Brands />
-      <Feeds />
+      <Feeds /> */}
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FiHome, FiDroplet, FiMaximize, FiMapPin, FiEye } from "react-icons/fi";
+import { FiHome, FiDroplet, FiMaximize, FiMapPin, FiEye, FiHeart, FiShare2 } from "react-icons/fi";
+import { useState } from "react";
 
 const ModernPropertyCard = ({ property }) => {
     const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState(false);
     const formatPrice = (amount) => {
         if (amount >= 10000000) {
             return `₹${(amount / 10000000).toFixed(1)}Cr`;
@@ -44,10 +46,38 @@ const ModernPropertyCard = ({ property }) => {
                     src={property.images?.[0] || "/images/property (1).jpg"}
                     alt={property.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                 />
 
+                {/* Always Visible Action Buttons */}
+                <div className="absolute top-3 right-3 flex flex-col space-y-1 z-30 opacity-100">
+                    <button
+                        onClick={() => navigate(`/property/${property.id}`)}
+                        className="bg-white text-black p-2.5 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                        title="View Details"
+                    >
+                        <FiEye className="w-4 h-4 stroke-2" />
+                    </button>
+                    <button
+                        onClick={() => setIsFavorite(!isFavorite)}
+                        className={`p-2.5 rounded-full transition-colors shadow-xl border-2 border-black ${isFavorite
+                            ? "bg-red-500 text-white hover:bg-red-600"
+                            : "bg-white text-black hover:bg-red-500 hover:text-white"
+                            }`}
+                        title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+                    >
+                        <FiHeart className={`w-4 h-4 stroke-2 ${isFavorite ? "fill-current" : ""}`} />
+                    </button>
+                    <button 
+                        className="bg-white text-black p-2.5 rounded-full hover:bg-green-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                        title="Share Property"
+                    >
+                        <FiShare2 className="w-4 h-4 stroke-2" />
+                    </button>
+                </div>
+
                 {/* Price Badge */}
-                <div className="absolute top-3 right-3">
+                <div className="absolute bottom-3 right-3">
                     <span className="bg-white/95 backdrop-blur-sm text-gray-900 px-3 py-1 rounded-full text-sm font-bold shadow-sm">
                         {formatPrice(property.price * 100000)}
                     </span>
@@ -124,14 +154,20 @@ const ModernPropertyCard = ({ property }) => {
                     </div>
                 )}
 
-                {/* Single Action Button */}
-                <button
-                    onClick={() => navigate(`/property/${property.id}`)}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2"
-                >
-                    <FiEye className="w-4 h-4" />
-                    <span>View Details</span>
-                </button>
+                {/* Action Buttons */}
+                <div className="flex gap-2">
+                    <button
+                        onClick={() => navigate(`/property/${property.id}`)}
+                        className="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white py-2 px-3 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors font-medium text-sm"
+                    >
+                        View Details
+                    </button>
+                    <button
+                        className="flex-1 bg-blue-600 text-white py-2 px-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
+                    >
+                        Enquire Now
+                    </button>
+                </div>
             </div>
         </motion.div>
     );

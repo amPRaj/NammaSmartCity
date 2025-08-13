@@ -367,185 +367,185 @@ const LeadsManagement = ({ onClose }) => {
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
             <div className="max-w-7xl mx-auto">
-        
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="w-full"
-                
-                    {/* Header */}
-                    <div className="flex justify-between items-center mb-8">
-                        <div>
-                            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                                Sales Lead Dashboard
-                            </h1>
-                            <p className="text-gray-600 dark:text-gray-400 mt-1">
-                                Manage calls, DMs, and track your sales pipeline
-                            </p>
+
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="w-full"
+
+                {/* Header */}
+                <div className="flex justify-between items-center mb-8">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                            Sales Lead Dashboard
+                        </h1>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">
+                            Manage calls, DMs, and track your sales pipeline
+                        </p>
+                    </div>
+                    <div className="flex gap-3">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => setShowAddModal(true)}
+                            className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-4 py-2 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+                        >
+                            <FiPlus className="w-4 h-4" />
+                            Add Lead
+                        </motion.button>
+                        <button
+                            onClick={onClose}
+                            className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        >
+                            <FiX className="w-4 h-4" />
+                            Back to Dashboard
+                        </button>
+                    </div>
+                </div>
+
+                {/* Stats Dashboard */}
+                <div className="grid grid-cols-2 md:grid-cols-6 gap-6 mb-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">Total Leads</p>
+                                <p className="text-2xl font-bold mt-1">{stats.total}</p>
+                            </div>
+                            <FiTarget className="text-3xl text-white/80" />
                         </div>
-                        <div className="flex gap-3">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setShowAddModal(true)}
-                                className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-4 py-2 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200"
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                        className="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">New</p>
+                                <p className="text-2xl font-bold mt-1">{stats.new}</p>
+                            </div>
+                            <FiStar className="text-3xl text-white/80" />
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                        className="bg-gradient-to-br from-yellow-500 to-orange-500 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">Contacted</p>
+                                <p className="text-2xl font-bold mt-1">{stats.contacted}</p>
+                            </div>
+                            <FiPhoneCall className="text-3xl text-white/80" />
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="bg-gradient-to-br from-green-500 to-emerald-500 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">Qualified</p>
+                                <p className="text-2xl font-bold mt-1">{stats.qualified}</p>
+                            </div>
+                            <FiUserCheck className="text-3xl text-white/80" />
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
+                        className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">Converted</p>
+                                <p className="text-2xl font-bold mt-1">{stats.converted}</p>
+                            </div>
+                            <FiTrendingUp className="text-3xl text-white/80" />
+                        </div>
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="bg-gradient-to-br from-emerald-500 to-teal-500 p-6 rounded-2xl text-white shadow-lg"
+                    >
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <p className="text-white/80 text-sm font-medium">Conversion</p>
+                                <p className="text-2xl font-bold mt-1">{stats.conversionRate}%</p>
+                            </div>
+                            <FiTarget className="text-3xl text-white/80" />
+                        </div>
+                    </motion.div>
+                </div>
+
+                {/* Filters and Actions */}
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6">
+                    <div className="flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex flex-wrap items-center gap-4">
+                            <div className="flex items-center space-x-2">
+                                <FiFilter className="text-gray-500" />
+                                <select
+                                    value={filters.status}
+                                    onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+                                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                                >
+                                    <option value="all">All Status</option>
+                                    <option value="new">🆕 New</option>
+                                    <option value="contacted">📞 Contacted</option>
+                                    <option value="qualified">✅ Qualified</option>
+                                    <option value="converted">🎉 Converted</option>
+                                    <option value="lost">❌ Lost</option>
+                                </select>
+                            </div>
+
+                            <select
+                                value={filters.source}
+                                onChange={(e) => setFilters({ ...filters, source: e.target.value })}
+                                className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
                             >
-                                <FiPlus className="w-4 h-4" />
-                                Add Lead
-                            </motion.button>
+                                <option value="all">All Sources</option>
+                                <option value="call">📞 Phone Call</option>
+                                <option value="whatsapp">� WhantsApp</option>
+                                <option value="facebook">📘 Facebook</option>
+                                <option value="instagram">� Instagramo</option>
+                                <option value="website">🌐 Website</option>
+                                <option value="referral">👥 Referral</option>
+                            </select>
+
+                            <select
+                                value={filters.assignedTo}
+                                onChange={(e) => setFilters({ ...filters, assignedTo: e.target.value })}
+                                className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                            >
+                                <option value="all">All Team Members</option>
+                                {salesTeam.map(member => (
+                                    <option key={member.id} value={member.name}>{member.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="flex items-center space-x-3">
                             <button
-                                onClick={onClose}
-                                className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 px-4 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                onClick={exportLeads}
+                                className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
                             >
-                                <FiX className="w-4 h-4" />
-                                Back to Dashboard
+                                <FiDownload className="w-4 h-4" />
+                                <span>Export CSV</span>
                             </button>
                         </div>
                     </div>
-
-                    {/* Stats Dashboard */}
-                    <div className="grid grid-cols-2 md:grid-cols-6 gap-6 mb-8">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="bg-gradient-to-br from-blue-500 to-blue-600 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">Total Leads</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.total}</p>
-                                </div>
-                                <FiTarget className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">New</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.new}</p>
-                                </div>
-                                <FiStar className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="bg-gradient-to-br from-yellow-500 to-orange-500 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">Contacted</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.contacted}</p>
-                                </div>
-                                <FiPhoneCall className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 }}
-                            className="bg-gradient-to-br from-green-500 to-emerald-500 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">Qualified</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.qualified}</p>
-                                </div>
-                                <FiUserCheck className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">Converted</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.converted}</p>
-                                </div>
-                                <FiTrendingUp className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5 }}
-                            className="bg-gradient-to-br from-emerald-500 to-teal-500 p-6 rounded-2xl text-white shadow-lg"
-                        >
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-white/80 text-sm font-medium">Conversion</p>
-                                    <p className="text-2xl font-bold mt-1">{stats.conversionRate}%</p>
-                                </div>
-                                <FiTarget className="text-3xl text-white/80" />
-                            </div>
-                        </motion.div>
-                    </div>
-
-                    {/* Filters and Actions */}
-                    <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 mb-6">
-                        <div className="flex flex-wrap items-center justify-between gap-4">
-                            <div className="flex flex-wrap items-center gap-4">
-                                <div className="flex items-center space-x-2">
-                                    <FiFilter className="text-gray-500" />
-                                    <select
-                                        value={filters.status}
-                                        onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                                        className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                                    >
-                                        <option value="all">All Status</option>
-                                        <option value="new">🆕 New</option>
-                                        <option value="contacted">📞 Contacted</option>
-                                        <option value="qualified">✅ Qualified</option>
-                                        <option value="converted">🎉 Converted</option>
-                                        <option value="lost">❌ Lost</option>
-                                    </select>
-                                </div>
-
-                                <select
-                                    value={filters.source}
-                                    onChange={(e) => setFilters({ ...filters, source: e.target.value })}
-                                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                                >
-                                    <option value="all">All Sources</option>
-                                    <option value="call">📞 Phone Call</option>
-                                    <option value="whatsapp">� WhantsApp</option>
-                                    <option value="facebook">📘 Facebook</option>
-                                    <option value="instagram">� Instagramo</option>
-                                    <option value="website">🌐 Website</option>
-                                    <option value="referral">👥 Referral</option>
-                                </select>
-
-                                <select
-                                    value={filters.assignedTo}
-                                    onChange={(e) => setFilters({ ...filters, assignedTo: e.target.value })}
-                                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-                                >
-                                    <option value="all">All Team Members</option>
-                                    {salesTeam.map(member => (
-                                        <option key={member.id} value={member.name}>{member.name}</option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <div className="flex items-center space-x-3">
-                                <button
-                                    onClick={exportLeads}
-                                    className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
-                                >
-                                    <FiDownload className="w-4 h-4" />
-                                    <span>Export CSV</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                </div>
             </div>
 
             {/* Leads Table */}
@@ -1064,8 +1064,8 @@ const LeadsManagement = ({ onClose }) => {
                     </div>
                 </div>
             )}
-               
-            </div>
+
+        </div>
 
     );
 };

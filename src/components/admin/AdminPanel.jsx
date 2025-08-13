@@ -23,17 +23,56 @@ const AdminPanel = () => {
     useEffect(() => {
         let unsubscribe;
 
+        // Check for existing session on component mount
+        const checkExistingSession = () => {
+            const adminSession = localStorage.getItem('admin-session');
+            const lastAccess = localStorage.getItem('last-admin-access');
+            const sessionExpiry = 24 * 60 * 60 * 1000; // 24 hours
+
+            if (adminSession && lastAccess) {
+                const timeSinceLastAccess = Date.now() - parseInt(lastAccess);
+                
+                if (timeSinceLastAccess < sessionExpiry) {
+                    // Session is still valid, restore admin state
+                    const savedAdmin = JSON.parse(localStorage.getItem('admin-user') || '{}');
+                    if (savedAdmin.email) {
+                        setAdmin(savedAdmin);
+                        localStorage.setItem('last-admin-access', Date.now().toString());
+                        setLoading(false);
+                        return true;
+                    }
+                } else {
+                    // Session expired, clear storage
+                    localStorage.removeItem('admin-session');
+                    localStorage.removeItem('last-admin-access');
+                    localStorage.removeItem('admin-user');
+                }
+            }
+            return false;
+        };
+
+        // Try to restore existing session first
+        if (checkExistingSession()) {
+            return;
+        }
+
         try {
             unsubscribe = onAdminAuthStateChanged((user) => {
                 setAdmin(user);
                 if (user) {
-                    // Set session storage when admin is authenticated
-                    sessionStorage.setItem('admin-session', 'active');
+                    // Set persistent storage when admin is authenticated
+                    localStorage.setItem('admin-session', 'active');
                     localStorage.setItem('last-admin-access', Date.now().toString());
+                    localStorage.setItem('admin-user', JSON.stringify({
+                        id: user.id,
+                        email: user.email,
+                        user_metadata: user.user_metadata
+                    }));
                 } else {
-                    // Clear session storage when admin logs out
-                    sessionStorage.removeItem('admin-session');
+                    // Clear storage when admin logs out
+                    localStorage.removeItem('admin-session');
                     localStorage.removeItem('last-admin-access');
+                    localStorage.removeItem('admin-user');
                 }
                 setLoading(false);
             });
@@ -55,18 +94,24 @@ const AdminPanel = () => {
 
     const handleLogin = (user) => {
         setAdmin(user);
-        // Set session storage when admin logs in
-        sessionStorage.setItem('admin-session', 'active');
+        // Set persistent storage when admin logs in
+        localStorage.setItem('admin-session', 'active');
         localStorage.setItem('last-admin-access', Date.now().toString());
+        localStorage.setItem('admin-user', JSON.stringify({
+            id: user.id,
+            email: user.email,
+            user_metadata: user.user_metadata
+        }));
     };
 
     const handleLogout = async () => {
         await adminLogout();
         setAdmin(null);
         setCurrentView("dashboard");
-        // Clear session storage when admin logs out
-        sessionStorage.removeItem('admin-session');
+        // Clear all admin storage when admin logs out
+        localStorage.removeItem('admin-session');
         localStorage.removeItem('last-admin-access');
+        localStorage.removeItem('admin-user');
     };
 
     const handleAddProperty = () => {
@@ -90,6 +135,31 @@ const AdminPanel = () => {
     const handleViewEstimation = () => {
         setCurrentView("estimation");
     };
+
+    // Activity tracker to extend session
+    useEffect(() => {
+        if (!admin) return;
+
+        const updateActivity = () => {
+            localStorage.setItem('last-admin-access', Date.now().toString());
+        };
+
+        // Track user activity
+        const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+        events.forEach(event => {
+            document.addEventListener(event, updateActivity, true);
+        });
+
+        // Update activity every 5 minutes
+        const activityInterval = setInterval(updateActivity, 5 * 60 * 1000);
+
+        return () => {
+            events.forEach(event => {
+                document.removeEventListener(event, updateActivity, true);
+            });
+            clearInterval(activityInterval);
+        };
+    }, [admin]);
 
     // Secret key combination to show admin login
     useEffect(() => {

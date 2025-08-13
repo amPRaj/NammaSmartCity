@@ -78,19 +78,11 @@ export const addProperty = async (propertyData) => {
 
 // Get all properties - Optimized for fast loading
 export const getAllProperties = async () => {
-    console.log("⚡ Fast loading properties...");
+    console.log("⚡ Loading properties from Supabase...");
 
     try {
-        // Step 1: Check localStorage first for instant loading
-        const localProperties = JSON.parse(localStorage.getItem('mock_properties') || '[]');
-
-        if (localProperties.length > 0) {
-            console.log("📱 Instant load:", localProperties.length, "properties from localStorage");
-            return { success: true, data: localProperties, source: 'localStorage' };
-        }
-
-        // Step 2: If no local data, try Supabase with quick timeout
-        console.log("🚀 Loading from Supabase...");
+        // Always try Supabase first for fresh data
+        console.log("🚀 Querying Supabase properties table...");
 
         const { data: properties, error } = await supabase
             .from(PROPERTIES_TABLE)
@@ -98,27 +90,72 @@ export const getAllProperties = async () => {
             .order('created_at', { ascending: false });
 
         if (error) {
+            console.error("❌ Supabase query error:", error);
+            
+            // Check if it's a table not found error
+            if (error.code === 'PGRST106' || error.message.includes('does not exist')) {
+                return {
+                    success: false,
+                    error: 'Properties table does not exist. Please run the schema SQL first.',
+                    data: [],
+                    source: 'error'
+                };
+            }
+            
             throw error;
         }
 
-        console.log("✅ Loaded", properties.length, "properties from Supabase");
-
-        // Cache in localStorage for faster loading next time
-        if (properties.length > 0) {
+        console.log("✅ Successfully loaded", properties?.length || 0, "properties from Supabase");
+        
+        if (properties && properties.length > 0) {
+            // Cache successful results
             localStorage.setItem('mock_properties', JSON.stringify(properties));
-            console.log("💾 Cached properties in localStorage for faster loading");
+            console.log("💾 Cached", properties.length, "properties for faster loading");
+            
+            // Log first property for debugging
+            console.log("📋 Sample property:", {
+                id: properties[0].id,
+                title: properties[0].title,
+                price: properties[0].price,
+                location: properties[0].location,
+                images: properties[0].images?.length || 0
+            });
+        } else {
+            console.log("⚠️ No properties found in database");
         }
 
-        return { success: true, data: properties, source: 'supabase' };
+        return { 
+            success: true, 
+            data: properties || [], 
+            source: 'supabase',
+            count: properties?.length || 0
+        };
+        
     } catch (error) {
-        console.error("❌ Supabase failed:", error.message);
+        console.error("❌ Failed to load properties:", error);
 
-        // Return empty array with helpful message
+        // Try to load from cache as fallback
+        try {
+            const cachedProperties = JSON.parse(localStorage.getItem('mock_properties') || '[]');
+            if (cachedProperties.length > 0) {
+                console.log("📱 Fallback: loaded", cachedProperties.length, "properties from cache");
+                return { 
+                    success: true, 
+                    data: cachedProperties, 
+                    source: 'cache-fallback',
+                    warning: 'Loaded from cache due to connection error'
+                };
+            }
+        } catch (cacheError) {
+            console.error("❌ Cache fallback failed:", cacheError);
+        }
+
         return {
-            success: true,
+            success: false,
+            error: error.message,
             data: [],
-            source: 'empty',
-            message: 'No properties found. Add some properties to get started!'
+            source: 'error',
+            details: error
         };
     }
 };

@@ -9,8 +9,7 @@ import {
   useVelocity,
 } from "framer-motion"
 
-
-import { cn } from "@/lib/utils"
+import { cn } from "../../lib/utils"
 
 interface TextScrollProps {
   text: string
@@ -109,9 +108,9 @@ export const TextScroll: React.FC<TextScrollProps> = ({
       <ParallaxText baseVelocity={default_velocity} className={className}>
         {text}
       </ParallaxText>
-      <ParallaxText baseVelocity={-default_velocity} className={className}>
+      {/* <ParallaxText baseVelocity={-default_velocity} className={className}>
         {text}
-      </ParallaxText>
+      </ParallaxText> */}
     </section>
   )
 }

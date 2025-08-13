@@ -9,6 +9,7 @@ const AdminLogin = ({ onLogin }) => {
         password: ""
     });
     const [showPassword, setShowPassword] = useState(false);
+    const [rememberMe, setRememberMe] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -28,6 +29,18 @@ const AdminLogin = ({ onLogin }) => {
         const result = await adminLogin(formData.email, formData.password);
 
         if (result.success) {
+            // Set extended session if remember me is checked
+            if (rememberMe) {
+                localStorage.setItem('admin-remember', 'true');
+                // Extend session to 7 days if remember me is checked
+                const extendedExpiry = Date.now() + (7 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('admin-session-expiry', extendedExpiry.toString());
+            } else {
+                localStorage.removeItem('admin-remember');
+                // Standard 24 hour session
+                const standardExpiry = Date.now() + (24 * 60 * 60 * 1000);
+                localStorage.setItem('admin-session-expiry', standardExpiry.toString());
+            }
             onLogin(result.user);
         } else {
             setError(result.error);

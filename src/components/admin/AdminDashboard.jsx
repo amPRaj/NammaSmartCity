@@ -99,11 +99,11 @@ const AdminDashboard = ({ onAddProperty, onEditProperty, onViewCalculator }) => 
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-6 lg:mb-8 space-y-4 lg:space-y-0">
                     <div className="flex-1">
-                        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent dark:from-white dark:via-purple-200 dark:to-white">
                             Admin Dashboard
                         </h1>
-                        <p className="text-gray-600 dark:text-gray-400 mt-1">
-                            Manage your smart city properties
+                        <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">
+                            Manage your smart city properties with ease
                         </p>
                         <div
                             onClick={() => {
@@ -112,10 +112,11 @@ const AdminDashboard = ({ onAddProperty, onEditProperty, onViewCalculator }) => 
                                 localStorage.setItem('last-admin-access', Date.now().toString());
                                 navigate('/admin/leads');
                             }}
-                            className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+                            className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-700 cursor-pointer hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 transition-all duration-300 shadow-sm hover:shadow-md"
                         >
-                            <p className="text-sm text-blue-800 dark:text-blue-200">
-                                💡 <strong>Lead Management:</strong> Click here or use the buttons below to access the lead management system
+                            <p className="text-sm text-blue-800 dark:text-blue-200 flex items-center gap-2">
+                                <span className="text-lg">🎯</span>
+                                <span><strong>Lead Management:</strong> Click here or use the buttons below to access the comprehensive lead management system</span>
                             </p>
                         </div>
                     </div>
@@ -131,7 +132,7 @@ const AdminDashboard = ({ onAddProperty, onEditProperty, onViewCalculator }) => 
                                 localStorage.setItem('last-admin-access', Date.now().toString());
                                 navigate('/admin/leads');
                             }}
-                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-blue-700 to-cyan-600 hover:from-blue-700 hover:via-blue-800 hover:to-cyan-700 text-white px-5 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-0.5"
                         >
                             <FiUserCheck className="w-4 h-4" />
                             <span>Manage Leads</span>
@@ -141,7 +142,7 @@ const AdminDashboard = ({ onAddProperty, onEditProperty, onViewCalculator }) => 
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={onViewCalculator}
-                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 hover:from-purple-700 hover:via-violet-700 hover:to-indigo-700 text-white px-5 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-0.5"
                         >
                             <FiBarChart2 className="w-4 h-4" />
                             <span>Calculator</span>
@@ -151,7 +152,7 @@ const AdminDashboard = ({ onAddProperty, onEditProperty, onViewCalculator }) => 
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={onAddProperty}
-                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-4 py-2.5 rounded-lg font-medium shadow-lg hover:shadow-xl transition-all duration-200 w-full sm:w-auto"
+                            className="flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 hover:from-emerald-700 hover:via-green-700 hover:to-teal-700 text-white px-5 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto transform hover:-translate-y-0.5"
                         >
                             <FiPlus className="w-4 h-4" />
                             <span>Add Property</span>

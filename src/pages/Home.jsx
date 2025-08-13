@@ -13,7 +13,7 @@ import MarketingAgency from "../components/marketing/MarketingAgency";
 
 const Home = () => {
   return (
-    <div className="pt-16 w-full">
+    <div className="w-full">
       <Hero />
       <Invest />
       {/* <Speciality />
