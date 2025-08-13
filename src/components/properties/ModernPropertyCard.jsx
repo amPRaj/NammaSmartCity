@@ -53,26 +53,26 @@ const ModernPropertyCard = ({ property }) => {
                 <div className="absolute top-3 right-3 flex flex-col space-y-1 z-30 opacity-100">
                     <button
                         onClick={() => navigate(`/property/${property.id}`)}
-                        className="bg-white text-black p-2.5 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                        className="bg-white text-black p-2.5 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-xl"
                         title="View Details"
                     >
-                        <FiEye className="w-4 h-4 stroke-2" />
+                        <FiEye className="w-4 h-4 text-black" />
                     </button>
                     <button
                         onClick={() => setIsFavorite(!isFavorite)}
-                        className={`p-2.5 rounded-full transition-colors shadow-xl border-2 border-black ${isFavorite
+                        className={`p-2.5 rounded-full transition-colors shadow-xl ${isFavorite
                             ? "bg-red-500 text-white hover:bg-red-600"
                             : "bg-white text-black hover:bg-red-500 hover:text-white"
                             }`}
                         title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
                     >
-                        <FiHeart className={`w-4 h-4 stroke-2 ${isFavorite ? "fill-current" : ""}`} />
+                        <FiHeart className={`w-4 h-4 stroke-2 ${isFavorite ? "text-white fill-current" : "text-black"}`} />
                     </button>
-                    <button 
-                        className="bg-white text-black p-2.5 rounded-full hover:bg-green-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                    <button
+                        className="bg-white text-black p-2.5 rounded-full hover:bg-green-600 hover:text-white transition-colors shadow-xl"
                         title="Share Property"
                     >
-                        <FiShare2 className="w-4 h-4 stroke-2" />
+                        <FiShare2 className="w-4 h-4 text-black" />
                     </button>
                 </div>
 

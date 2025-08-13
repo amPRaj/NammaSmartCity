@@ -394,26 +394,26 @@ const PropertyListing = ({
                                 <div className="absolute top-2 right-2 flex flex-col space-y-1 z-30 opacity-100">
                                     <button
                                         onClick={() => handleViewDetails(property)}
-                                        className="bg-white text-black p-2.5 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                                        className="bg-white text-black p-2.5 rounded-full hover:bg-blue-600 hover:text-white transition-colors shadow-xl"
                                         title="View Details"
                                     >
-                                        <FiEye className="w-4 h-4 stroke-2" />
+                                        <FiEye className="w-4 h-4 stroke-2 text-black" />
                                     </button>
                                     <button
                                         onClick={() => toggleFavorite(property.id)}
-                                        className={`p-2.5 rounded-full transition-colors shadow-xl border-2 border-black ${favorites.includes(property.id)
+                                        className={`p-2.5 rounded-full transition-colors shadow-xl ${favorites.includes(property.id)
                                             ? "bg-red-500 text-white hover:bg-red-600"
                                             : "bg-white text-black hover:bg-red-500 hover:text-white"
                                             }`}
                                         title={favorites.includes(property.id) ? "Remove from Favorites" : "Add to Favorites"}
                                     >
-                                        <FiHeart className={`w-4 h-4 stroke-2 ${favorites.includes(property.id) ? "fill-current" : ""}`} />
+                                        <FiHeart className={`w-4 h-4 stroke-2 ${favorites.includes(property.id) ? "text-white fill-current" : "text-black"}`} />
                                     </button>
                                     <button
-                                        className="bg-white text-black p-2.5 rounded-full hover:bg-green-600 hover:text-white transition-colors shadow-xl border-2 border-black"
+                                        className="bg-white text-black p-2.5 rounded-full hover:bg-green-600 hover:text-white transition-colors shadow-xl"
                                         title="Share Property"
                                     >
-                                        <FiShare2 className="w-4 h-4 stroke-2" />
+                                        <FiShare2 className="w-4 h-4 stroke-2 text-black" />
                                     </button>
                                 </div>
 
