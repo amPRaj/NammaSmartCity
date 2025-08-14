@@ -3,7 +3,7 @@ import { feeds } from "../data/dummyData";
 
 const Blog = () => {
   return (
-    <div className="pt-20 max-w-7xl mx-auto px-4">
+    <div className="pt-24 sm:pt-28 max-w-7xl mx-auto px-4">
       <BlogPostsList />
       <Pagination itemsPerPage={6} pageData={feeds} />
     </div>

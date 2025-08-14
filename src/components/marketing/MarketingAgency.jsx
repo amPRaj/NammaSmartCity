@@ -1,69 +1,37 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-    FiCamera,
-    FiVideo,
-    FiTrendingUp,
-    FiTarget,
-    FiGlobe,
-    FiSmartphone,
-    FiMonitor,
-    FiUsers,
     FiBarChart2,
-    FiZap
+    FiZap,
+    FiHome,
+    FiUsers
 } from "react-icons/fi";
+import ServiceEnquiryModal from "../modals/ServiceEnquiryModal";
+import { marketingServices } from "../../data/servicesData";
 
 const MarketingAgency = () => {
-    const services = [
-        {
-            icon: FiCamera,
-            title: "360° Virtual Tours",
-            description: "Immersive virtual reality tours that let buyers explore properties from anywhere in the world",
-            features: ["4K Quality", "VR Compatible", "Interactive Hotspots", "Mobile Optimized"],
-            color: "from-blue-500 to-cyan-500"
-        },
-        {
-            icon: FiVideo,
-            title: "Cinematic Property Videos",
-            description: "Professional drone footage and cinematic videos that showcase properties in stunning detail",
-            features: ["Drone Footage", "4K Resolution", "Professional Editing", "Social Media Ready"],
-            color: "from-purple-500 to-pink-500"
-        },
-        {
-            icon: FiTrendingUp,
-            title: "Digital Marketing",
-            description: "Comprehensive digital marketing strategies to maximize property visibility and reach",
-            features: ["SEO Optimization", "Social Media", "Google Ads", "Content Marketing"],
-            color: "from-green-500 to-emerald-500"
-        },
-        {
-            icon: FiTarget,
-            title: "Targeted Advertising",
-            description: "AI-powered targeted advertising to reach the right buyers at the right time",
-            features: ["AI Targeting", "Multi-Platform", "Real-time Analytics", "ROI Tracking"],
-            color: "from-orange-500 to-red-500"
-        },
-        {
-            icon: FiGlobe,
-            title: "Global Reach",
-            description: "International marketing campaigns to attract global investors and buyers",
-            features: ["Multi-language", "Global Platforms", "Currency Support", "Local Expertise"],
-            color: "from-indigo-500 to-purple-500"
-        },
-        {
-            icon: FiSmartphone,
-            title: "Mobile-First Design",
-            description: "Mobile-optimized listings and marketing materials for today's mobile-first world",
-            features: ["Responsive Design", "App Integration", "Fast Loading", "Touch Optimized"],
-            color: "from-teal-500 to-blue-500"
-        }
-    ];
+    const [selectedService, setSelectedService] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Using services from shared data
+    const services = marketingServices;
 
     const stats = [
-        { icon: FiMonitor, value: "500+", label: "Properties Marketed", color: "text-blue-600" },
-        { icon: FiUsers, value: "98%", label: "Client Satisfaction", color: "text-green-600" },
-        { icon: FiBarChart2, value: "3x", label: "Faster Sales", color: "text-purple-600" },
-        { icon: FiZap, value: "24/7", label: "Smart Support", color: "text-orange-600" }
+        { icon: FiHome, value: "25+", label: "Properties Marketed", color: "text-blue-600" },
+        { icon: FiUsers, value: "95%", label: "Client Satisfaction", color: "text-green-600" },
+        { icon: FiBarChart2, value: "2x", label: "Faster Sales", color: "text-purple-600" },
+        { icon: FiZap, value: "24/7", label: "Support Available", color: "text-orange-600" }
     ];
+
+    const handleServiceEnquiry = (service) => {
+        setSelectedService(service);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedService(null);
+    };
 
     return (
         <div className="py-20 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
@@ -159,8 +127,11 @@ const MarketingAgency = () => {
 
                                 {/* CTA */}
                                 <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                                    <button className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105`}>
-                                        Learn More
+                                    <button 
+                                        onClick={() => handleServiceEnquiry(service)}
+                                        className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105`}
+                                    >
+                                        Get Quote
                                     </button>
                                 </div>
                             </div>
@@ -183,12 +154,22 @@ const MarketingAgency = () => {
                             Join hundreds of satisfied clients who have revolutionized their property sales with our 360° marketing solutions.
                         </p>
                         <div className="flex justify-center">
-                            <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition-colors">
+                            <button 
+                                onClick={() => handleServiceEnquiry({ title: 'Free Consultation', description: 'General consultation about our marketing services' })}
+                                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold transition-colors"
+                            >
                                 Get Free Consultation
                             </button>
                         </div>
                     </div>
                 </motion.div>
+
+                {/* Service Enquiry Modal */}
+                <ServiceEnquiryModal 
+                    isOpen={isModalOpen}
+                    onClose={closeModal}
+                    service={selectedService}
+                />
             </div>
         </div>
     );

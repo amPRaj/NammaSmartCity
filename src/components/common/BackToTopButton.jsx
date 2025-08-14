@@ -1,9 +1,10 @@
 import React from "react";
 import { FiChevronUp } from "react-icons/fi";
-import { useSmoothScroll } from "../ui/smooth-scroll";
 
 const BackToTopButton = ({ showButton }) => {
-  const { scrollToTop } = useSmoothScroll();
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <button

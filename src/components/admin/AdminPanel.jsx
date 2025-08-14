@@ -7,7 +7,9 @@ import PropertyForm from "./PropertyForm";
 import PropertyCalculator from "./PropertyCalculator";
 import LeadsManagement from "./LeadsManagement";
 import PropertyEstimation from "./PropertyEstimation";
-import { FiLogOut, FiUser, FiUsers, FiGrid } from "react-icons/fi";
+import ServiceEnquiriesManagement from "./ServiceEnquiriesManagement";
+import ServiceAnalytics from "./ServiceAnalytics";
+import { FiLogOut, FiUser, FiUsers, FiGrid, FiMessageSquare, FiBarChart2 } from "react-icons/fi";
 
 const AdminPanel = () => {
     const navigate = useNavigate();
@@ -31,7 +33,7 @@ const AdminPanel = () => {
 
             if (adminSession && lastAccess) {
                 const timeSinceLastAccess = Date.now() - parseInt(lastAccess);
-                
+
                 if (timeSinceLastAccess < sessionExpiry) {
                     // Session is still valid, restore admin state
                     const savedAdmin = JSON.parse(localStorage.getItem('admin-user') || '{}');
@@ -134,6 +136,14 @@ const AdminPanel = () => {
 
     const handleViewEstimation = () => {
         setCurrentView("estimation");
+    };
+
+    const handleViewServiceEnquiries = () => {
+        setCurrentView("service-enquiries");
+    };
+
+    const handleViewServiceAnalytics = () => {
+        setCurrentView("service-analytics");
     };
 
     // Activity tracker to extend session
@@ -262,6 +272,26 @@ const AdminPanel = () => {
                             <FiGrid className="w-4 h-4" />
                             <span>Estimation</span>
                         </button>
+                        <button
+                            onClick={handleViewServiceEnquiries}
+                            className={`py-3 md:py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 whitespace-nowrap ${currentView === "service-enquiries"
+                                ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                                : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
+                                }`}
+                        >
+                            <FiMessageSquare className="w-4 h-4" />
+                            <span>Services</span>
+                        </button>
+                        <button
+                            onClick={handleViewServiceAnalytics}
+                            className={`py-3 md:py-4 px-1 border-b-2 font-medium text-sm flex items-center space-x-2 whitespace-nowrap ${currentView === "service-analytics"
+                                ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                                : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600"
+                                }`}
+                        >
+                            <FiBarChart2 className="w-4 h-4" />
+                            <span>Analytics</span>
+                        </button>
                     </nav>
                 </div>
             </div>
@@ -283,6 +313,16 @@ const AdminPanel = () => {
                 {currentView === "estimation" && (
                     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
                         <PropertyEstimation onClose={() => setCurrentView("dashboard")} />
+                    </div>
+                )}
+                {currentView === "service-enquiries" && (
+                    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+                        <ServiceEnquiriesManagement />
+                    </div>
+                )}
+                {currentView === "service-analytics" && (
+                    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+                        <ServiceAnalytics />
                     </div>
                 )}
             </div>

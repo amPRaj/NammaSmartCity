@@ -951,7 +951,7 @@ const LeadsPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16 md:pt-20 p-4 sm:p-6">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 sm:pt-28 p-4 sm:p-6">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

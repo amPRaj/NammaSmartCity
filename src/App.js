@@ -20,9 +20,13 @@ import PropertyDetailsPage from "./pages/PropertyDetailsPage";
 import LeadsPage from "./pages/LeadsPage";
 import SupabaseTest from "./components/admin/SupabaseTest";
 import PropertyTest from "./components/admin/PropertyTest";
-import { SmoothScrollProvider } from "./components/ui/smooth-scroll";
+
+import GlobalActionButtons from "./components/ui/global-action-buttons";
+import ServiceEnquiryModal from "./components/modals/ServiceEnquiryModal";
 function App() {
   const [showButton, setShowButton] = useState(false);
+  const [isServiceEnquiryOpen, setIsServiceEnquiryOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
   // const dispatch = useDispatch();
   const route = useLocation();
 
@@ -31,42 +35,59 @@ function App() {
     window.scrollY > 500 ? setShowButton(true) : setShowButton(false);
   });
 
+  // Handle service enquiry modal
+  const handleServiceEnquiry = (service) => {
+    setSelectedService(service);
+    setIsServiceEnquiryOpen(true);
+  };
 
+  const closeServiceEnquiry = () => {
+    setIsServiceEnquiryOpen(false);
+    setSelectedService(null);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [route]);
 
   return (
-    <SmoothScrollProvider>
-      <div>
-        <Navbar />
-        <div className="min-h-screen">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about-us" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/property" element={<Property />} />
-            <Route path="/properties" element={<PropertyListing />} />
-            <Route path="/property/:id" element={<PropertyDetailsPage />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/admin" element={<AdminPanel />} />
-            <Route path="/admin/leads" element={<LeadsPage />} />
-            <Route path="/test-supabase" element={<SupabaseTest />} />
-            <Route path="/test-properties" element={<PropertyTest />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </div>
-        <div className="px-[2%] md:px-[6%] bg-card-dark border border-card-dark">
-          <div className="pt-8">
-            <Footer />
-          </div>
-        </div>
-        <BackToTopButton showButton={showButton} />
+    <div>
+      <Navbar />
+      <div className="min-h-screen">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/property" element={<Property />} />
+          <Route path="/properties" element={<PropertyListing />} />
+          <Route path="/property/:id" element={<PropertyDetailsPage />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin/leads" element={<LeadsPage />} />
+          <Route path="/test-supabase" element={<SupabaseTest />} />
+          <Route path="/test-properties" element={<PropertyTest />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </div>
-    </SmoothScrollProvider>
+      <div className="px-[2%] md:px-[6%] bg-card-dark border border-card-dark">
+        <div className="pt-8">
+          <Footer />
+        </div>
+      </div>
+      <BackToTopButton showButton={showButton} />
+      
+      {/* Global Action Buttons - Visible on all pages */}
+      <GlobalActionButtons onServiceEnquiry={handleServiceEnquiry} />
+      
+      {/* Service Enquiry Modal */}
+      <ServiceEnquiryModal 
+        isOpen={isServiceEnquiryOpen}
+        onClose={closeServiceEnquiry}
+        service={selectedService}
+      />
+    </div>
   );
 }
 

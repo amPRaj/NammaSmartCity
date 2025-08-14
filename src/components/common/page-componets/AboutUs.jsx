@@ -1,23 +1,22 @@
 import { BiCreditCard, BiGlobe, BiHomeAlt } from "react-icons/bi";
 import { motion } from "framer-motion";
-import { ScrollReveal } from "../../ui/smooth-scroll";
 
 const AboutUs = () => {
   const features = [
     {
       icon: BiHomeAlt,
-      title: "Smart City Properties",
-      description: "Specializing in modern smart city developments with cutting-edge technology, sustainable design, and future-ready infrastructure for the next generation."
+      title: "Quality Properties",
+      description: "Focusing on well-built residential and commercial properties in Davanagere's growing neighborhoods, ensuring quality construction and modern amenities for comfortable living."
     },
     {
       icon: BiGlobe,
-      title: "Bangalore Real Estate Experts",
-      description: "Deep local expertise in Bangalore's booming real estate market, connecting you with premium properties in IT corridors and emerging neighborhoods."
+      title: "Growing Market Presence",
+      description: "Starting with Davanagere's promising real estate market and expanding our reach to serve multiple cities, connecting you with quality properties in prime locations across emerging markets."
     },
     {
       icon: BiCreditCard,
-      title: "Investment Solutions",
-      description: "Comprehensive investment guidance with transparent pricing, ROI analysis, and flexible financing options tailored for smart property investments."
+      title: "Transparent Dealings",
+      description: "Honest pricing, clear documentation, and personalized service to help you make informed property decisions with complete transparency and trust."
     }
   ];
 
@@ -81,7 +80,7 @@ const AboutUs = () => {
                 viewport={{ once: true }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight"
               >
-                Your Smart City
+                Your Trusted
                 <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Property Partner
                 </span>
@@ -93,7 +92,7 @@ const AboutUs = () => {
                 viewport={{ once: true }}
                 className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
               >
-                Leading Bangalore's smart city revolution with premium properties in tech hubs and emerging corridors. We combine local expertise with innovative technology to deliver exceptional real estate solutions for modern living and smart investments.
+                Your dedicated partner in Karnataka's emerging real estate markets. Starting with Davanagere and expanding our presence, we're committed to helping you find the perfect property with honest guidance, transparent pricing, and personalized service tailored to your needs.
               </motion.p>
             </div>
 
@@ -131,16 +130,16 @@ const AboutUs = () => {
             >
               <div className="flex flex-wrap gap-8 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">250+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Smart Properties</div>
+                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">25+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Quality Properties</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">500+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Happy Families</div>
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">50+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Happy Clients</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-green-600 dark:text-green-400">15+</div>
-                  <div className="text-sm text-gray-600 dark:text-gray-400">Bangalore Locations</div>
+                  <div className="text-3xl font-bold text-green-600 dark:text-green-400">5+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Service Areas</div>
                 </div>
               </div>
             </motion.div>

@@ -34,9 +34,14 @@ const Footer = () => {
                   <FaTwitter />
                 </div>
 
-                <div className="icon-box bg-dark-light hover:bg-hover-color-dark">
+                <a 
+                  href="https://www.instagram.com/namma_smartcity_properties/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="icon-box bg-dark-light hover:bg-hover-color-dark"
+                >
                   <FaInstagram />
-                </div>
+                </a>
 
                 <div className="icon-box bg-dark-light hover:bg-hover-color-dark">
                   <FaLinkedin />

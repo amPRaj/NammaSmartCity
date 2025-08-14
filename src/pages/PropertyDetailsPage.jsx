@@ -76,7 +76,7 @@ const PropertyDetailsPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-16">
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-24 sm:pt-28">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
         );
@@ -84,7 +84,7 @@ const PropertyDetailsPage = () => {
 
     if (error || !property) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-16">
+            <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 pt-24 sm:pt-28">
                 <div className="text-center">
                     <div className="text-6xl mb-4">🏠</div>
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -107,7 +107,7 @@ const PropertyDetailsPage = () => {
     const images = property.images || [];
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 sm:pt-28">
             {/* Compact Hero Section */}
             <div className="relative h-[50vh] bg-black">
                 {images.length > 0 ? (

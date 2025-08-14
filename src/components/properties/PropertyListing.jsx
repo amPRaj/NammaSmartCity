@@ -202,7 +202,7 @@ const PropertyListing = ({
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center pt-24 sm:pt-28">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
                     <p className="text-gray-600 dark:text-gray-400 text-lg">Loading properties...</p>
@@ -213,7 +213,7 @@ const PropertyListing = ({
 
     return (
         <div className={`${!showFilters ? 'bg-transparent' : 'min-h-screen bg-gray-50 dark:bg-gray-900'}`}>
-            <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className={`mx-auto ${!showFilters ? 'max-w-full px-0 py-6' : 'max-w-full px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-6'}`}>
                 {/* Optional Title */}
                 {title && (
                     <div className="text-center mb-8">
@@ -361,8 +361,10 @@ const PropertyListing = ({
                 )}
 
                 {/* Properties Grid */}
-                <div className={`grid gap-4 ${viewMode === "grid"
-                    ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+                <div className={`grid gap-6 ${viewMode === "grid"
+                    ? !showFilters 
+                        ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" // Home page: 3 columns max
+                        : "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" // Properties page: 5 columns max
                     : "grid-cols-1 max-w-6xl mx-auto"
                     }`}>
                     {filteredProperties.map((property, index) => (

@@ -8,7 +8,7 @@ import {
 
 const About = () => {
   return (
-    <div className="pt-20 max-w-7xl mx-auto px-4">
+    <div className="pt-24 sm:pt-28 max-w-7xl mx-auto px-4">
      
      <Team />
       <AboutUs />

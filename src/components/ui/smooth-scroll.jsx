@@ -1,57 +1,60 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import Lenis from 'lenis';
 
-// Smooth Scroll Provider Component
+// Lenis Smooth Scroll Provider
 export const SmoothScrollProvider = ({ children }) => {
+  const lenisRef = useRef(null);
+
   useEffect(() => {
-    // Enhanced smooth scrolling behavior
-    const smoothScrollTo = (target, duration = 1000) => {
-      const targetPosition = target.offsetTop;
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      let startTime = null;
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false, // Disable on touch devices for better performance
+      touchMultiplier: 2,
+      infinite: false,
+    });
 
-      const animation = (currentTime) => {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      };
+    lenisRef.current = lenis;
 
-      const ease = (t, b, c, d) => {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
-      };
-
-      requestAnimationFrame(animation);
-    };
+    // Animation frame loop
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 
     // Handle anchor link clicks
     const handleAnchorClick = (e) => {
-      const href = e.target.getAttribute('href');
+      const target = e.target.closest('a');
+      if (!target) return;
+      
+      const href = target.getAttribute('href');
       if (href && href.startsWith('#')) {
         e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          smoothScrollTo(target);
+        const element = document.querySelector(href);
+        if (element) {
+          lenis.scrollTo(element, {
+            offset: -100, // Account for navbar
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+          });
         }
       }
     };
 
-    // Add event listeners to all anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-      link.addEventListener('click', handleAnchorClick);
-    });
+    // Add event listener
+    document.addEventListener('click', handleAnchorClick);
 
     // Cleanup
     return () => {
-      anchorLinks.forEach(link => {
-        link.removeEventListener('click', handleAnchorClick);
-      });
+      document.removeEventListener('click', handleAnchorClick);
+      lenis.destroy();
     };
   }, []);
 
@@ -143,13 +146,19 @@ export const ParallaxScroll = ({ children, speed = 0.5, className = '' }) => {
   );
 };
 
-// Smooth scroll hook for programmatic scrolling
+// Lenis smooth scroll hook for programmatic scrolling
 export const useSmoothScroll = () => {
-  const scrollToElement = (elementId, offset = 0) => {
+  const scrollToElement = (elementId, offset = -100) => {
     const element = document.getElementById(elementId);
-    if (element) {
-      const targetPosition = element.offsetTop - offset;
-      
+    if (element && window.lenis) {
+      window.lenis.scrollTo(element, {
+        offset: offset,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+      });
+    } else if (element) {
+      // Fallback to native smooth scroll
+      const targetPosition = element.offsetTop + offset;
       window.scrollTo({
         top: targetPosition,
         behavior: 'smooth'
@@ -158,10 +167,17 @@ export const useSmoothScroll = () => {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    if (window.lenis) {
+      window.lenis.scrollTo(0, {
+        duration: 2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return { scrollToElement, scrollToTop };

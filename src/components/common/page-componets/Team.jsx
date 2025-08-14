@@ -83,7 +83,7 @@ const Team = () => {
 
         <CardCarousel
           images={teamMembers}
-          autoplayDelay={2000}
+          autoplayDelay={1000}
           showPagination={false}
           showNavigation={true}
         />

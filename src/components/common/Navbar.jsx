@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FiDelete, FiMoon, FiSun } from "react-icons/fi";
 import { BiSearch, BiMenu, BiUser, BiBuildingHouse } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import {
   closeSidebar,
@@ -21,6 +21,31 @@ const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // SPA Navigation - scroll to section if on home page
+  const scrollToSection = (sectionId) => {
+    if (location.pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offsetTop = element.offsetTop - 100; // Account for navbar height
+        window.scrollTo(0, offsetTop);
+      }
+    } else {
+      // Navigate to home page with section hash
+      navigate(`/#${sectionId}`);
+    }
+  };
+
+  // Handle navigation based on current page
+  const handleNavigation = (url, sectionId) => {
+    if (sectionId && location.pathname === '/') {
+      scrollToSection(sectionId);
+    } else {
+      navigate(url);
+    }
+    dispatch(closeSidebar());
+  };
 
   // Dark mode toggle
   const handleDarkMode = () => {
@@ -47,26 +72,26 @@ const Navbar = () => {
 
   return (
     <div
-      className="navbar fixed w-full z-20 top-0 left-0 py-2 bg-white/70 backdrop-blur-2xl shadow-lg border-b border-white/20 dark:border-gray-800/30 dark:bg-gray-900/70 supports-[backdrop-filter]:bg-white/50 dark:supports-[backdrop-filter]:bg-gray-900/50"
+      className="navbar fixed w-full z-50 top-0 left-0 py-3 sm:py-4 bg-white/95 backdrop-blur-xl shadow-xl border-b border-white/30 dark:border-gray-700/30 dark:bg-gray-900/95 supports-[backdrop-filter]:bg-white/90 dark:supports-[backdrop-filter]:bg-gray-900/90"
     >
-      <div className="w-full px-6 lg:px-12 xl:px-16 flex-center-between h-12">
+      <div className="w-full px-4 sm:px-6 lg:px-12 xl:px-16 flex-center-between h-14 sm:h-16">
         <Link to="/" className="flex-shrink-0 flex-align-center gap-x-4 group">
           <div className="relative">
             <img
               src="/images/namma-logo.png"
               alt="Namma Logo"
-              className="h-8 w-auto md:h-10 lg:h-12 object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-10 w-auto sm:h-12 lg:h-14 object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
           </div>
           <div className="flex flex-col">
-            <h1 className="hidden lg:block text-lg xl:text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
+            <h1 className="hidden lg:block text-xl xl:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
               Namma Smart City
             </h1>
-            <h1 className="hidden md:block lg:hidden text-base font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
+            <h1 className="hidden md:block lg:hidden text-lg font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 bg-clip-text text-transparent">
               Namma Properties
             </h1>
-            <span className="hidden lg:block text-xs bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
+            <span className="hidden lg:block text-sm bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
               Properties
             </span>
           </div>
@@ -84,21 +109,21 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             {/*----------------------------- Dark mode toggle-------------------------------------------------- */}
             <button
-              className="bg-white/90 backdrop-blur-sm shadow-sm border border-gray-200/50 dark:border-gray-700/50 w-8 h-8 rounded-full flex items-center justify-center dark:bg-gray-800/90 hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-all cursor-pointer group"
+              className="bg-white/95 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-gray-700/50 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center dark:bg-gray-800/95 hover:shadow-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all cursor-pointer group"
               onClick={handleDarkMode}
             >
               {darkMode ?
-                <FiSun className="text-yellow-500 w-4 h-4 group-hover:rotate-180 transition-transform duration-300" /> :
-                <FiMoon className="text-gray-600 dark:text-gray-400 w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
+                <FiSun className="text-yellow-500 w-5 h-5 group-hover:rotate-180 transition-transform duration-300" /> :
+                <FiMoon className="text-gray-600 dark:text-gray-400 w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
               }
             </button>
 
             {/*----------------------------- Mobile Menu Toggle-------------------------------------------------- */}
             <button
-              className="md:hidden bg-white/90 backdrop-blur-sm shadow-sm border border-gray-200/50 dark:border-gray-700/50 w-8 h-8 rounded-full flex items-center justify-center dark:bg-gray-800/90 hover:shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-all cursor-pointer group"
+              className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg border border-gray-200/50 dark:border-gray-700/50 w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center dark:bg-gray-800/95 hover:shadow-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all cursor-pointer group"
               onClick={() => dispatch(openSidebar())}
             >
-              <BiMenu className="text-gray-600 dark:text-gray-400 w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
+              <BiMenu className="text-gray-600 dark:text-gray-400 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             </button>
           </div>
 
@@ -124,16 +149,14 @@ const Navbar = () => {
               {/* Mobile Menu Links */}
               <nav className="p-6">
                 <ul className="space-y-4">
-                  {navLinks.map(({ id, linkText, url }) => (
+                  {navLinks.map(({ id, linkText, url, sectionId }) => (
                     <li key={id}>
-                      <NavLink
-                        to={url}
-                        end
-                        className="block py-3 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg font-medium transition-all duration-200"
-                        onClick={() => dispatch(closeSidebar())}
+                      <button
+                        className="w-full text-left block py-3 px-4 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/20 rounded-lg font-medium transition-all duration-200"
+                        onClick={() => handleNavigation(url, sectionId)}
                       >
                         {linkText}
-                      </NavLink>
+                      </button>
                     </li>
                   ))}
                 </ul>

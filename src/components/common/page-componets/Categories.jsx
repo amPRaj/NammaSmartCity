@@ -48,7 +48,7 @@ const Categories = () => {
           </div>
 
           <div
-            className="gap-3 mt-4 overflow-auto flex-align-center scroll-smooth hide-scrollbar"
+            className="gap-3 mt-4 overflow-auto flex-align-center hide-scrollbar"
             ref={categoryContainer}
           >
             {categories.map(({ id, name, number, image }) => (
