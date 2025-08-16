@@ -16,7 +16,8 @@ const Team = () => {
       src: "/images/Prof-Pic.jpg",
       alt: "Professor",
       name: " Sofia ",
-      designation: "Chief Technology Officer"
+      designation: "Chief Technology Officer",
+      className: "sofia-image"
     },
     {
       src: "/images/Shiv Pf pic.jpg",

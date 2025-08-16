@@ -14,7 +14,7 @@ export const navLinks = [
   {
     id: 3,
     linkText: "Properties",
-    url: "/property",
+    url: "/properties",
     sectionId: "properties",
   },
   {

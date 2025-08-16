@@ -51,7 +51,7 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
   if (!mounted) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-4 sm:bottom-8 sm:right-6 md:bottom-6 md:right-6 z-50" style={{ paddingBottom: 'env(safe-area-inset-bottom)', paddingRight: 'env(safe-area-inset-right)' }}>
       {/* Action Buttons */}
       <AnimatePresence mode="wait">
         {isOpen && (
@@ -60,7 +60,7 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="mb-4 flex flex-col items-end space-y-3"
+            className="mb-3 sm:mb-4 flex flex-col items-end space-y-2 sm:space-y-3"
           >
             {actions.map((action, index) => (
               <motion.button
@@ -89,7 +89,7 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
                 whileTap={{ scale: 0.95 }}
                 onClick={action.action}
                 className={`
-                  group flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16
+                  group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
                   ${action.bgColor} text-white rounded-full
                   shadow-lg ${action.shadowColor} hover:shadow-xl
                   transition-all duration-200 ease-out
@@ -101,7 +101,7 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
                 <div className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300 ease-out" />
                 
                 {/* Icon */}
-                <action.icon className="w-6 h-6 sm:w-7 sm:h-7 relative z-10" />
+                <action.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 relative z-10" />
                 
                 {/* Label tooltip */}
                 <div className="absolute right-full mr-3 px-3 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
@@ -120,9 +120,9 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
         className={`
-          relative w-16 h-16 sm:w-18 sm:h-18 
+          relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 
           bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500
-          text-white rounded-full shadow-xl hover:shadow-2xl
+          text-white rounded-full shadow-lg hover:shadow-xl
           transition-all duration-300 ease-out
           flex items-center justify-center
           border-2 border-white/30 backdrop-blur-sm
@@ -139,10 +139,10 @@ const GlobalActionButtons = ({ onServiceEnquiry }) => {
           className="relative z-10"
         >
           {isOpen ? (
-            <FiX className="w-7 h-7 sm:w-8 sm:h-8" />
+            <FiX className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
           ) : (
             <div className="flex items-center justify-center">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
+              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex items-center justify-center">
                 <div className="w-6 h-0.5 bg-white rounded-full" />
                 <div className="w-0.5 h-6 bg-white rounded-full absolute" />
               </div>

@@ -17,6 +17,7 @@ interface TeamMember {
   alt: string
   name?: string
   designation?: string
+  className?: string
 }
 
 interface CarouselProps {
@@ -51,6 +52,10 @@ export const CardCarousel: React.FC<CarouselProps> = ({
     height: 450px;
     object-fit: cover;
     aspect-ratio: 4/6;
+  }
+  
+  .swiper-slide img.sofia-image {
+    object-position: center;
   }
   
   
@@ -100,7 +105,7 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                 <div className="w-full h-[450px] rounded-3xl overflow-hidden">
                   <img
                     src={member.src}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${member.className || ''}`}
                     alt={member.alt}
                     onError={(e) => {
                       console.log('Image failed to load:', member.src);
@@ -125,7 +130,7 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                 <div className="w-full h-[450px] rounded-3xl overflow-hidden">
                   <img
                     src={member.src}
-                    className="w-full h-full object-cover"
+                    className={`w-full h-full object-cover ${member.className || ''}`}
                     alt={member.alt}
                     onError={(e) => {
                       console.log('Image failed to load:', member.src);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
-import BackToTopButton from "./components/common/BackToTopButton";
+
 import Footer from "./components/common/Footer";
 import Navbar from "./components/common/Navbar";
 import {
@@ -24,16 +24,13 @@ import PropertyTest from "./components/admin/PropertyTest";
 import GlobalActionButtons from "./components/ui/global-action-buttons";
 import ServiceEnquiryModal from "./components/modals/ServiceEnquiryModal";
 function App() {
-  const [showButton, setShowButton] = useState(false);
+
   const [isServiceEnquiryOpen, setIsServiceEnquiryOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
   // const dispatch = useDispatch();
   const route = useLocation();
 
-  // Show/Hide scroll to top button
-  window.addEventListener("scroll", () => {
-    window.scrollY > 500 ? setShowButton(true) : setShowButton(false);
-  });
+
 
   // Handle service enquiry modal
   const handleServiceEnquiry = (service) => {
@@ -76,7 +73,7 @@ function App() {
           <Footer />
         </div>
       </div>
-      <BackToTopButton showButton={showButton} />
+
       
       {/* Global Action Buttons - Visible on all pages */}
       <GlobalActionButtons onServiceEnquiry={handleServiceEnquiry} />

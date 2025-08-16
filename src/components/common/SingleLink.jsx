@@ -1,11 +1,11 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const SingleLink = ({ id, linkText, url, sectionId }) => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const handleClick = (e) => {
-    if (sectionId && location.pathname === '/') {
+    // Only handle section scrolling for Home page sections, not for Properties
+    if (sectionId && location.pathname === '/' && url === '/') {
       e.preventDefault();
       const element = document.getElementById(sectionId);
       if (element) {
@@ -13,19 +13,27 @@ const SingleLink = ({ id, linkText, url, sectionId }) => {
         window.scrollTo(0, offsetTop);
       }
     }
+    // For Properties and other pages, let NavLink handle normal navigation
   };
+
+
 
   return (
     <div className="relative group">
       <NavLink
         to={url}
-        end
+        end={url === '/'}
         key={id}
         onClick={handleClick}
-        className="relative px-4 py-3 lg:px-6 lg:py-4 flex-align-center gap-x-1 text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-semibold transition-all duration-300 rounded-xl hover:bg-blue-50/70 dark:hover:bg-blue-900/30 group-hover:scale-105 text-sm lg:text-base"
+        className="navbar-link relative px-3 py-1.5 lg:px-4 lg:py-2 flex-align-center gap-x-1 font-medium transition-all duration-200 rounded-lg text-sm lg:text-base text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/20 dark:hover:bg-white/10"
+        style={{
+          textDecoration: 'none',
+          borderBottom: 'none',
+          position: 'relative'
+        }}
+        data-no-active-style="true"
       >
         {linkText}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
       </NavLink>
     </div>
   );

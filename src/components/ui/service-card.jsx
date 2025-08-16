@@ -25,21 +25,22 @@ const ServiceCard = ({ service, index, onEnquiry, variant = 'default' }) => {
   const descriptionVariants = {
     default: "text-gray-600 dark:text-gray-400 mb-4 line-clamp-3 text-sm leading-relaxed",
     featured: "text-gray-700 dark:text-gray-300 mb-8 line-clamp-5 text-lg leading-relaxed",
-    compact: "text-gray-600 dark:text-gray-400 mb-3 line-clamp-2 text-sm"
+    compact: "text-gray-600 dark:text-gray-400 mb-2 line-clamp-2 text-xs"
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ y: -5 }}
+      transition={{ delay: index * 0.05, duration: 0.3 }}
+      whileHover={{ y: -2 }}
       className="group h-full"
     >
       <div className={`
         ${cardVariants[variant]}
-        rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 
-        p-6 h-full flex flex-col relative overflow-hidden
+        ${variant === 'compact' ? 'rounded-lg shadow-md p-4' : 'rounded-2xl shadow-lg p-6'} 
+        hover:shadow-xl transition-all duration-300 
+        h-full flex flex-col relative overflow-hidden
         transform hover:-translate-y-1
       `}>
         {/* Background Pattern */}
@@ -70,11 +71,11 @@ const ServiceCard = ({ service, index, onEnquiry, variant = 'default' }) => {
           </p>
 
           {/* Features */}
-          <div className="space-y-2 mb-6">
+          <div className={`space-y-1 ${variant === 'compact' ? 'mb-3' : 'mb-6'}`}>
             {service.features.slice(0, variant === 'compact' ? 2 : 3).map((feature, featureIndex) => (
               <div key={featureIndex} className="flex items-center space-x-2">
                 <div className={`w-1.5 h-1.5 bg-gradient-to-r ${service.color} rounded-full`}></div>
-                <span className="text-sm text-gray-700 dark:text-gray-300">{feature}</span>
+                <span className={`${variant === 'compact' ? 'text-xs' : 'text-sm'} text-gray-700 dark:text-gray-300`}>{feature}</span>
               </div>
             ))}
             {service.features.length > (variant === 'compact' ? 2 : 3) && (
@@ -90,12 +91,12 @@ const ServiceCard = ({ service, index, onEnquiry, variant = 'default' }) => {
             className={`
               w-full bg-gradient-to-r ${service.color} hover:shadow-lg
               text-white border-0 group-hover:scale-105 transition-all duration-300
-              ${variant === 'featured' ? 'py-3 text-base font-semibold' : 'py-2.5 text-sm font-semibold'}
+              ${variant === 'featured' ? 'py-3 text-base font-semibold' : variant === 'compact' ? 'py-2 text-xs font-semibold' : 'py-2.5 text-sm font-semibold'}
               rounded-lg shadow-md relative overflow-hidden
             `}
           >
             <span className="relative z-10">
-              Get Quote
+              {variant === 'compact' ? 'Enquire' : 'Get Quote'}
             </span>
             <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
           </Button>

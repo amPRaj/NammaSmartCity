@@ -35,10 +35,11 @@ const ModernPropertyCard = ({ property }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 overflow-hidden border border-gray-100 dark:border-gray-700"
+            transition={{ duration: 0.3 }}
+            whileHover={{ y: -1 }}
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg transition-all duration-150 overflow-hidden border border-gray-100 dark:border-gray-700"
         >
             {/* Image Container */}
             <div className="relative overflow-hidden h-48">
