@@ -13,7 +13,7 @@ const Team = () => {
       designation: "CEO & Founder"
     },
     {
-      src: "/images/Prof-Pic.jpg",
+      src: "/images/Prof-Pic.png",
       alt: "Professor",
       name: " Sofia ",
       designation: "Chief Technology Officer",
