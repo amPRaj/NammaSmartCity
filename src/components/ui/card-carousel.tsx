@@ -29,7 +29,7 @@ interface CarouselProps {
 
 export const CardCarousel: React.FC<CarouselProps> = ({
   images,
-  autoplayDelay = 1000,
+  autoplayDelay = 2000,
   showPagination = true,
   showNavigation = true,
 }) => {
