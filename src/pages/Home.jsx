@@ -81,7 +81,7 @@ const Home = () => {
           <div className="text-center mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">About Us</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Davanagere's trusted real estate experts with 15+ years of experience
+              Davanagere's trusted real estate experts with 5+ years of experience
             </p>
           </div>
           {/* Mobile Stats - Using Existing Components & Data */}
@@ -113,12 +113,12 @@ const Home = () => {
       <section id="properties" className="bg-white dark:bg-gray-800 pt-2 md:pt-0">
         {/* Mobile Properties - Database Driven */}
         <div className="block md:hidden py-4 px-4">
-          <div className="text-center mb-3">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">🏠 Featured Properties</h2>
+          {/* <div className="text-center mb-3">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Featured Properties</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Premium properties in Davanagere's prime locations
             </p>
-          </div>
+          </div> */}
           <PropertiesShowcase />
         </div>
 
@@ -209,7 +209,7 @@ const Home = () => {
         {/* Desktop Full Sections */}
         <div className="hidden md:block">
           <StatsSection
-            title="📊 Why Choose Our Services"
+            title="Why Choose Our Services"
             subtitle="Trusted by thousands of satisfied clients across the country"
             stats={serviceStats}
           />

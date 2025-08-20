@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 const ProcessSection = ({ steps, title, subtitle }) => {
@@ -47,7 +46,7 @@ const ProcessSection = ({ steps, title, subtitle }) => {
               <span>⚡</span>
               <span>Process</span>
             </motion.div>
-            
+
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -56,7 +55,7 @@ const ProcessSection = ({ steps, title, subtitle }) => {
             >
               {title}
             </motion.h2>
-            
+
             {subtitle && (
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
@@ -96,8 +95,8 @@ const ProcessSection = ({ steps, title, subtitle }) => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -10, 
+                whileHover={{
+                  y: -10,
                   scale: 1.02,
                   transition: { duration: 0.3 }
                 }}
@@ -107,7 +106,7 @@ const ProcessSection = ({ steps, title, subtitle }) => {
                 <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 relative overflow-hidden">
                   {/* Card Glow Effect */}
                   <div className={`absolute inset-0 bg-gradient-to-r ${step.color || 'from-blue-500 to-purple-500'} opacity-0 group-hover:opacity-5 transition-opacity duration-500 rounded-3xl`}></div>
-                  
+
                   {/* Step Number with Enhanced Design */}
                   <div className="relative mb-8">
                     <div className={`w-24 h-24 mx-auto bg-gradient-to-r ${step.color || 'from-blue-500 to-purple-500'} rounded-full flex items-center justify-center text-white font-bold text-3xl shadow-xl relative z-10 group-hover:scale-110 transition-transform duration-300`}>
@@ -129,7 +128,7 @@ const ProcessSection = ({ steps, title, subtitle }) => {
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                     {step.title}
                   </h3>
-                  
+
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-base group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
                     {step.description}
                   </p>

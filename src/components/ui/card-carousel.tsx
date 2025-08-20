@@ -134,7 +134,7 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                            fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
                            textShadow: '0 1px 2px rgba(0,0,0,0.05)',
                            letterSpacing: '0.1em',
-                           fontWeight: '500'
+                           fontWeight: '700'
                          }}>
                         {member.designation}
                       </p>
@@ -183,7 +183,7 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                            fontFamily: '"Inter", "Helvetica Neue", Arial, sans-serif',
                            textShadow: '0 1px 2px rgba(0,0,0,0.05)',
                            letterSpacing: '0.05em',
-                           fontWeight: '500'
+                           fontWeight: '700'
                          }}>
                         {member.designation}
                       </p>

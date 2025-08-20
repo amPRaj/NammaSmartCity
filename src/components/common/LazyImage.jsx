@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { FiHome } from 'react-icons/fi';
 
-const LazyImage = ({ 
-    src, 
-    alt, 
-    className = "", 
+const LazyImage = ({
+    src,
+    alt,
+    className = "",
     placeholder = null,
-    fallback = null 
+    fallback = null
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isInView, setIsInView] = useState(false);
@@ -55,7 +55,7 @@ const LazyImage = ({
     return (
         <div ref={imgRef} className={`relative ${className}`}>
             {!isInView && (placeholder || defaultPlaceholder)}
-            
+
             {isInView && !hasError && (
                 <>
                     {!isLoaded && (placeholder || defaultPlaceholder)}
@@ -69,7 +69,7 @@ const LazyImage = ({
                     />
                 </>
             )}
-            
+
             {hasError && (fallback || defaultFallback)}
         </div>
     );

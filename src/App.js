@@ -58,7 +58,7 @@ function App() {
           <Route path="/property" element={<Property />} />
           <Route path="/properties" element={<PropertyListing />} />
           <Route path="/property/:id" element={<PropertyDetailsPage />} />
-          <Route path="/blog" element={<Blog />} />
+          {/* <Route path="/blog" element={<Blog />} /> */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/home" element={<Home />} />
           <Route path="/admin" element={<AdminPanel />} />
@@ -74,12 +74,12 @@ function App() {
         </div>
       </div>
 
-      
+
       {/* Global Action Buttons - Visible on all pages */}
       <GlobalActionButtons onServiceEnquiry={handleServiceEnquiry} />
-      
+
       {/* Service Enquiry Modal */}
-      <ServiceEnquiryModal 
+      <ServiceEnquiryModal
         isOpen={isServiceEnquiryOpen}
         onClose={closeServiceEnquiry}
         service={selectedService}

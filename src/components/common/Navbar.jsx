@@ -134,7 +134,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Sidebar */}
           <div
-            className={`md:hidden mobile-modal fixed w-screen h-screen top-0 left-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-all duration-300 ${isSidebarOpen && "opacity-100 pointer-events-auto"}`}
+            className={`md:hidden mobile-modal fixed w-screen h-screen top-0 left-0 bg-white/60 z-50 opacity-0 pointer-events-none transition-all duration-300 ${isSidebarOpen && "opacity-100 pointer-events-auto"}`}
             onClick={handleCloseSidebar}
           >
             <div

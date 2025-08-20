@@ -24,10 +24,10 @@ const Hero = () => {
             </div> */}
 
             {/* Main Heading - Mobile Responsive */}
-            <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 md:mb-8 group" style={{ lineHeight: '0.8' }}>
+            <h1 className=" pt-8 text-xl sm:text-xl md:text-6xl lg:text-4xl xl:text-7xl font-black mb-4 sm:mb-6 md:mb-8 group" style={{ lineHeight: '0.8' }}>
               <div className="relative block -mb-2 sm:-mb-3 md:-mb-4">
                 <FlipLink
-                  className="text-4xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent hover:from-purple-600 hover:via-blue-600 hover:to-purple-800 transition-all duration-500 relative z-10 hover:scale-105 transform block drop-shadow-2xl uppercase"
+                  className="text-3xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent hover:from-purple-600 hover:via-blue-600 hover:to-purple-800 transition-all duration-500 relative z-10 hover:scale-105 transform block drop-shadow-2xl uppercase"
                   style={{
                     fontFamily: '"Impact", "Arial Black", "Helvetica Neue", Arial, sans-serif',
                     fontWeight: '900',
@@ -79,7 +79,7 @@ const Hero = () => {
               }}
               className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-purple-600 hover:via-blue-600 hover:to-purple-700 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold transition-all duration-300 mb-5 sm:mb-6 text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-1 relative overflow-hidden group"
             >
-              <span className="relative z-10">🏠 Explore Properties</span>
+              <span className="relative z-10"> Explore Properties</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
 

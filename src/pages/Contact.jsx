@@ -31,7 +31,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="pt-24 sm:pt-28 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 min-h-screen relative overflow-hidden">
+    <div className="pt-4 sm:pt-28 bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 min-h-screen relative overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>

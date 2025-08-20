@@ -20,13 +20,13 @@ const Team = () => {
       src: "/images/AKASH.png",
       alt: "Akash KM",
       name: "Akash KM",
-      designation: "Head of Property Onboarding & Inventory Strategy"
+      designation: "Head of Property Onboarding"
     },
     {
       src: "/images/RAVI.png",
       alt: "Ravi Lingangoudru",
       name: "Ravi Lingangoudru",
-      designation: "Head of Client Engagement & Lead Management"
+      designation: "Head of Client Engagement"
     },
     {
       src: "/images/raj.png",
